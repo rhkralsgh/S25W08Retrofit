@@ -36,4 +36,5 @@ class SongViewModel(
             }
         }
     }
+    fun findSong(id: String) = _songList.value.find { it.id == id }
 }
