@@ -10,9 +10,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import kr.ac.kumoh.s20210053.s25w08retrofit.model.Song
 import kr.ac.kumoh.s20210053.s25w08retrofit.ui.theme.S25W08RetrofitTheme
+import kr.ac.kumoh.s20210053.s25w08retrofit.viewmodel.SongViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,15 +31,25 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
 @Composable
-fun MainScreen() {
+fun MainScreen(viewModel: SongViewModel = viewModel()) {
+    val songList by viewModel.songList.collectAsState()
+
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-
+            SongList(songList)
         }
+    }
+}
+
+@Composable
+fun SongList(list: List<Song>) {
+    Column {
+        Text(list.toString())
     }
 }
