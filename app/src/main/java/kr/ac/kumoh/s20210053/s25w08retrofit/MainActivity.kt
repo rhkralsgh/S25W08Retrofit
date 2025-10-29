@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -88,7 +89,9 @@ fun SongCard(song: Song) {
         elevation = CardDefaults.cardElevation(8.dp)
     ) {
         Row(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .height(IntrinsicSize.Min),
             verticalAlignment = Alignment.CenterVertically
         ) {
             // Coil을 사용한 비동기 이미지 출력
@@ -107,6 +110,8 @@ fun SongCard(song: Song) {
             Column(
                 modifier = Modifier
                     .padding(vertical = 16.dp)
+                    .fillMaxSize(),
+                verticalArrangement = Arrangement.SpaceAround
             ) {
                 Text(
                     text = song.title,
